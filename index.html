@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CM Dental Clinics</title>
+  <meta name="description" content="CM Dental Clinics — gentle dental care, modern equipment, and trusted doctors. Book an appointment today." />
+  <style>
+    :root{
+      --brand:#1f6feb;            /* Primary */
+      --brand-ink:#0b3d91;        /* Darker primary */
+      --accent:#6ee7b7;           /* Mint accent */
+      --ink:#0b1220;              /* Text */
+      --muted:#6b7280;            /* Muted text */
+      --bg:#f7fafc;               /* App bg */
+      --card:#ffffff;             /* Card bg */
+      --ring:rgba(31,111,235,.18);
+      --shadow:0 10px 30px rgba(15, 23, 42, .08);
+      --radius:18px;
+      --radius-sm:12px;
+      --container:1100px;
+      --header-h:64px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji';
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+    }
+
+    /* Utility */
+    .container{max-width:var(--container); margin-inline:auto; padding:0 20px}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:0; cursor:pointer; font-weight:600; transition:transform .12s ease, box-shadow .2s ease; box-shadow:var(--shadow);}
+    .btn-primary{background:var(--brand); color:#fff}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .pill{padding:8px 12px; border-radius:999px; background:#e8f0ff; color:var(--brand-ink); font-weight:600; font-size:12px; letter-spacing:.3px}
+    .cards{display:grid; gap:18px}
+
+    /* Header/Nav */
+    header{
+      position:sticky; top:0; z-index:80;
+      backdrop-filter:saturate(180%) blur(8px);
+      background:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(15,23,42,.06);
+    }
+    .nav{
+      height:var(--header-h);
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .brand .logo{display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--brand), #60a5fa)}
+    .brand .logo svg{width:22px; height:22px; color:white}
+
+    /* Desktop nav */
+    .links{display:none; gap:18px}
+    .links a{color:var(--ink); text-decoration:none; font-weight:600; padding:10px 12px; border-radius:10px}
+    .links a.active, .links a:hover{background:rgba(31,111,235,.08); color:var(--brand-ink)}
+
+    /* Mobile menu */
+    .menu-btn{appearance:none; border:0; background:transparent; width:40px; height:40px; display:grid; place-items:center; border-radius:10px}
+    .menu-btn:active{background:rgba(15,23,42,.06)}
+    .mobile-drawer{position:fixed; inset:var(--header-h) 12px auto 12px; background:var(--card); border:1px solid rgba(15,23,42,.08); border-radius:16px; box-shadow:var(--shadow); padding:12px; display:none}
+    .mobile-drawer a{display:block; padding:12px 14px; border-radius:10px; color:var(--ink); text-decoration:none; font-weight:600}
+    .mobile-drawer a:hover{background:rgba(31,111,235,.08)}
+
+    /* Hero */
+    .hero{padding:24px 0 28px; background:linear-gradient(180deg,#eff6ff, #ffffff)}
+    .hero-grid{display:grid; gap:22px}
+    .hero h1{font-size:clamp(26px, 5vw, 44px); line-height:1.1; margin:8px 0}
+    .hero p.lead{color:var(--muted); font-size:clamp(14px, 2.8vw, 18px)}
+    .contact-bar{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+    .contact-item{display:flex; align-items:center; gap:8px; padding:10px 14px; background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:999px; box-shadow:var(--shadow); font-weight:600}
+    .contact-item svg{width:18px; height:18px}
+
+    /* Carousel */
+    .carousel{position:relative; border-radius:var(--radius); overflow:hidden; background:#000; box-shadow:var(--shadow)}
+    .track{display:flex; transition:transform .5s ease; touch-action:pan-y;}
+    .slide{min-width:100%; height:270px; position:relative}
+    .slide img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+    .ctrl{position:absolute; inset:auto 10px 10px; display:flex; gap:8px}
+    .ctrl button{border:0; border-radius:999px; padding:10px 12px; background:rgba(255,255,255,.85); box-shadow:var(--shadow); font-weight:700; cursor:pointer}
+    .dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px}
+    .dots button{width:8px; height:8px; border-radius:999px; border:0; background:rgba(255,255,255,.5)}
+    .dots button.active{background:#fff; width:22px}
+
+    /* About */
+    .about{padding:48px 0}
+    .about-grid{display:grid; gap:18px}
+    .about-card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; border:1px solid rgba(15,23,42,.06)}
+    .about-img{border-radius:var(--radius); overflow:hidden; height:220px}
+    .about-img img{width:100%; height:100%; object-fit:cover}
+
+    /* Testimonials */
+    .testimonials{padding:48px 0; background:linear-gradient(180deg,#ffffff, #f5fff6)}
+    .t-row{display:flex; gap:14px; overflow:auto; scroll-snap-type:x mandatory; padding-bottom:8px}
+    .t-card{flex:0 0 85%; scroll-snap-align:center; background:var(--card); border:1px solid rgba(15,23,42,.06); border-radius:var(--radius-sm); box-shadow:var(--shadow); padding:18px}
+    .t-stars{font-size:18px; letter-spacing:2px; color:#f59e0b}
+    .t-name{margin-top:10px; font-weight:700}
+
+    /* Contact */
+    .contact{padding:48px 0}
+    form{display:grid; gap:12px; background:var(--card); padding:18px; border-radius:var(--radius); border:1px solid rgba(15,23,42,.06); box-shadow:var(--shadow)}
+    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid #d1d5db; font:inherit}
+    input:focus, textarea:focus{outline:none; box-shadow:0 0 0 4px var(--ring); border-color:var(--brand)}
+    textarea{min-height:120px; resize:vertical}
+
+    /* Footer */
+    footer{padding:24px 0; text-align:center; color:var(--muted)}
+
+    /* Media Queries */
+    @media (min-width: 768px){
+      .links{display:flex}
+      .menu-btn{display:none}
+      .hero{padding:46px 0 54px}
+      .hero-grid{grid-template-columns: 1.1fr 1fr; align-items:center}
+      .slide{height:360px}
+      .about-grid{grid-template-columns: 1fr 1fr; align-items:center}
+      .about-img{height:100%}
+      .t-card{flex-basis: 360px}
+      .t-row{padding:6px}
+    }
+
+    @media (min-width: 1024px){
+      .slide{height:420px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- Tooth icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 7.5c0 3-1.5 4.5-2.25 6.75-.75 2.25-1.125 5.25-2.25 6-.75.5-1.5 0-2.25-.75s-1.5-1.5-2.25-.75-1.5 1.25-2.25.75c-1.125-.75-1.5-3.75-2.25-6C5.25 12 3.75 10.5 3.75 7.5A5.75 5.75 0 0 1 9.5 1.75h5A5.75 5.75 0 0 1 20.25 7.5Z"/></svg>
+        </div>
+        <span>CM Dental Clinics</span>
+      </div>
+
+      <nav class="links" aria-label="Primary">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-btn" aria-label="Open menu" id="menuBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="drawer" aria-label="Mobile menu" hidden>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero / Home -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">Trusted Care • Advanced Dentistry</span>
+        <h1>Gentle, modern dental care for every smile</h1>
+        <p class="lead">From routine checkups to cosmetic dentistry, our specialists use the latest technology to keep your smile healthy and bright.</p>
+        <div class="contact-bar" aria-label="Clinic contact details">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.14a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+91 98949 57985</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <span>cmdental@gmail.com</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>188,Opp to Abhinandan Hosptial, Pollachi Rd., Sundarapuram, Coimbatore</span>
+          </div>
+        </div>
+        <div style="margin-top:16px">
+          <a href="#contact" class="btn btn-primary">Book Appointment</a>
+        </div>
+      </div>
+
+      <!-- Doctor Carousel -->
+      <div class="carousel" aria-roledescription="carousel" aria-label="Doctor images">
+        <div class="track" id="track">
+          <figure class="slide"><img src="cm1.jpg" alt="Dentist with patient in modern clinic" /></figure>
+          <figure class="slide"><img src="cm3.jpg" alt="Dental surgeon portrait" /></figure>
+          <figure class="slide"><img src="cm2.jpg" alt="Team of dental doctors" /></figure>
+        </div>
+        <div class="ctrl">
+          <button id="prev" aria-label="Previous slide">‹</button>
+          <button id="next" aria-label="Next slide">›</button>
+        </div>
+        <div class="dots" id="dots" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container about-grid">
+      <div class="about-img">
+        <img src="cm4.jpeg" alt="CM Dental Clinics equipment" />
+      </div>
+      <article class="about-card">
+        <h2>About CM Dental Clinics</h2>
+        <p>We combine compassionate care with advanced technology to deliver exceptional results. From preventive check-ups to cosmetic dentistry and implants, our team ensures a comfortable experience at every visit.</p>
+        <ul>
+          <li>• Experienced specialists & pain-free treatments</li>
+          <li>• Digital X‑rays, intraoral scanners & sterilization protocols</li>
+          <li>• Flexible timings & emergency slots</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <h2 style="margin:0 0 14px">What Our Patients Say</h2>
+      <div class="t-row" aria-label="Testimonials (horizontal scroll on mobile)">
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p>“The best dental experience I’ve had. Friendly team and spotless clinic!”</p>
+          <div class="t-name">— Arjun K.</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p>“They explained everything clearly and made me feel relaxed throughout.”</p>
+          <div class="t-name">— Priya M.</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p>“Painless root canal and quick recovery. Highly recommended.”</p>
+          <div class="t-name">— Karthik R.</div>
+        </div>
+        <div class="t-card">
+          <div class="t-stars">★★★★★</div>
+          <p>“Great with kids—my daughter loves her dentist now!”</p>
+          <div class="t-name">— Meera S.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container" style="display:grid; gap:18px; grid-template-columns:1fr; align-items:start">
+      <div>
+        <h2>Contact Us</h2>
+        <p class="lead">Have a question or need an appointment? Send us a message and we’ll get back to you shortly.</p>
+        <form id="contactForm" novalidate>
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="tel" name="phone" placeholder="Phone (optional)" />
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2025 CM Dental Clinics — All rights reserved.</div>
+  </footer>
+
+  <script>
+    // ===== Mobile Drawer =====
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = drawer.style.display === 'block';
+      drawer.style.display = isOpen ? 'none' : 'block';
+      drawer.hidden = isOpen;
+    });
+    drawer.addEventListener('click', (e)=>{
+      if(e.target.matches('a')){ drawer.style.display='none'; drawer.hidden=true; }
+    });
+
+    // ===== Active link on scroll =====
+    const sections = ['home','about','testimonials','contact'].map(id=>document.getElementById(id));
+    const navLinks = Array.from(document.querySelectorAll('.links a'));
+    const setActive = () => {
+      let current = 'home';
+      for(const sec of sections){
+        const rect = sec.getBoundingClientRect();
+        if(rect.top <= window.innerHeight * 0.33) current = sec.id;
+      }
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    };
+    document.addEventListener('scroll', setActive, {passive:true});
+    setActive();
+
+    // ===== Carousel (touch-friendly) =====
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const dotsWrap = document.getElementById('dots');
+
+    let index = 0; let auto;
+    const createDots = () => {
+      slides.forEach((_,i)=>{
+        const b = document.createElement('button');
+        b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+        b.addEventListener('click', ()=>{ index=i; update(); restartAuto(); });
+        dotsWrap.appendChild(b);
+      });
+    };
+    const update = () => {
+      const width = track.clientWidth; // responsive width
+      track.style.transform = `translateX(${-index * width}px)`;
+      Array.from(dotsWrap.children).forEach((d,i)=>d.classList.toggle('active', i===index));
+    };
+    const clampIndex = () => { if(index < 0) index = slides.length-1; if(index >= slides.length) index = 0; };
+    const nextSlide = () => { index++; clampIndex(); update(); };
+    const prevSlide = () => { index--; clampIndex(); update(); };
+
+    next.addEventListener('click', ()=>{ nextSlide(); restartAuto(); });
+    prev.addEventListener('click', ()=>{ prevSlide(); restartAuto(); });
+
+    // Swipe support
+    let startX = 0, dx = 0, dragging = false;
+    track.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; dragging = true; dx = 0; }, {passive:true});
+    track.addEventListener('touchmove', (e)=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
+    track.addEventListener('touchend', ()=>{
+      dragging = false;
+      if(Math.abs(dx) > 40){ dx < 0 ? nextSlide() : prevSlide(); restartAuto(); }
+    });
+
+    // Auto-play
+    const startAuto = () => auto = setInterval(nextSlide, 4500);
+    const stopAuto = () => clearInterval(auto);
+    const restartAuto = () => { stopAuto(); startAuto(); };
+
+    // Resize handler to keep widths exact on orientation change
+    window.addEventListener('resize', update);
+
+    // Init
+    createDots();
+    update();
+    startAuto();
+
+    // ===== Contact form (demo) =====
+    document.getElementById('contactForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      alert('Thank you! Your message has been sent.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
