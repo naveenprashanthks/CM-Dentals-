@@ -1,362 +1,1238 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CM Dental Clinics</title>
-  <meta name="description" content="CM Dental Clinics — gentle dental care, modern equipment, and trusted doctors. Book an appointment today." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --brand:#1f6feb;            /* Primary */
-      --brand-ink:#0b3d91;        /* Darker primary */
-      --accent:#6ee7b7;           /* Mint accent */
-      --ink:#0b1220;              /* Text */
-      --muted:#6b7280;            /* Muted text */
-      --bg:#f7fafc;               /* App bg */
-      --card:#ffffff;             /* Card bg */
-      --ring:rgba(31,111,235,.18);
-      --shadow:0 10px 30px rgba(15, 23, 42, .08);
-      --radius:18px;
-      --radius-sm:12px;
-      --container:1100px;
-      --header-h:64px;
+      --accent:#0b84ff;
+      --accent-2:#00b4d8;
+      --bg:#f6fbff;
+      --glass-bg: rgba(255,255,255,0.7);
+      --header-h:72px;
+      --card-radius:14px;
+      --max-w:1100px;
+      --soft-shadow: 0 8px 30px rgba(12,15,25,0.08);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji';
-      color:var(--ink);
-      background:var(--bg);
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#f7fcff 0%, #eef9ff 100%);
+      color:#053246;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      scroll-behavior:smooth;
+      -webkit-text-size-adjust:100%;
+      line-height:1.45;
     }
 
-    /* Utility */
-    .container{max-width:var(--container); margin-inline:auto; padding:0 20px}
-    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius:999px; border:0; cursor:pointer; font-weight:600; transition:transform .12s ease, box-shadow .2s ease; box-shadow:var(--shadow);}
-    .btn-primary{background:var(--brand); color:#fff}
-    .btn-primary:hover{transform:translateY(-1px)}
-    .pill{padding:8px 12px; border-radius:999px; background:#e8f0ff; color:var(--brand-ink); font-weight:600; font-size:12px; letter-spacing:.3px}
-    .cards{display:grid; gap:18px}
-
-    /* Header/Nav */
+    /* HEADER */
     header{
-      position:sticky; top:0; z-index:80;
-      backdrop-filter:saturate(180%) blur(8px);
-      background:rgba(255,255,255,.75);
-      border-bottom:1px solid rgba(15,23,42,.06);
-    }
-    .nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
       height:var(--header-h);
-      display:flex; align-items:center; justify-content:space-between;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 20px;
+      gap:12px;
+      z-index:1200;
+      transition:all .25s ease;
+      background: linear-gradient(90deg, rgba(11,132,255,0.95), rgba(0,180,216,0.92));
+      box-shadow: 0 6px 18px rgba(11,132,255,0.08);
+      backdrop-filter: blur(6px);
+      color:white;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-    .brand .logo{display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--brand), #60a5fa)}
-    .brand .logo svg{width:22px; height:22px; color:white}
-
-    /* Desktop nav */
-    .links{display:none; gap:18px}
-    .links a{color:var(--ink); text-decoration:none; font-weight:600; padding:10px 12px; border-radius:10px}
-    .links a.active, .links a:hover{background:rgba(31,111,235,.08); color:var(--brand-ink)}
-
-    /* Mobile menu */
-    .menu-btn{appearance:none; border:0; background:transparent; width:40px; height:40px; display:grid; place-items:center; border-radius:10px}
-    .menu-btn:active{background:rgba(15,23,42,.06)}
-    .mobile-drawer{position:fixed; inset:var(--header-h) 12px auto 12px; background:var(--card); border:1px solid rgba(15,23,42,.08); border-radius:16px; box-shadow:var(--shadow); padding:12px; display:none}
-    .mobile-drawer a{display:block; padding:12px 14px; border-radius:10px; color:var(--ink); text-decoration:none; font-weight:600}
-    .mobile-drawer a:hover{background:rgba(31,111,235,.08)}
-
-    /* Hero */
-    .hero{padding:24px 0 28px; background:linear-gradient(180deg,#eff6ff, #ffffff)}
-    .hero-grid{display:grid; gap:22px}
-    .hero h1{font-size:clamp(26px, 5vw, 44px); line-height:1.1; margin:8px 0}
-    .hero p.lead{color:var(--muted); font-size:clamp(14px, 2.8vw, 18px)}
-    .contact-bar{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
-    .contact-item{display:flex; align-items:center; gap:8px; padding:10px 14px; background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:999px; box-shadow:var(--shadow); font-weight:600}
-    .contact-item svg{width:18px; height:18px}
-
-    /* Carousel */
-    .carousel{position:relative; border-radius:var(--radius); overflow:hidden; background:#000; box-shadow:var(--shadow)}
-    .track{display:flex; transition:transform .5s ease; touch-action:pan-y;}
-    .slide{min-width:100%; height:270px; position:relative}
-    .slide img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
-    .ctrl{position:absolute; inset:auto 10px 10px; display:flex; gap:8px}
-    .ctrl button{border:0; border-radius:999px; padding:10px 12px; background:rgba(255,255,255,.85); box-shadow:var(--shadow); font-weight:700; cursor:pointer}
-    .dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px}
-    .dots button{width:8px; height:8px; border-radius:999px; border:0; background:rgba(255,255,255,.5)}
-    .dots button.active{background:#fff; width:22px}
-
-    /* About */
-    .about{padding:48px 0}
-    .about-grid{display:grid; gap:18px}
-    .about-card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; border:1px solid rgba(15,23,42,.06)}
-    .about-img{border-radius:var(--radius); overflow:hidden; height:220px}
-    .about-img img{width:100%; height:100%; object-fit:cover}
-
-    /* Testimonials */
-    .testimonials{padding:48px 0; background:linear-gradient(180deg,#ffffff, #f5fff6)}
-    .t-row{display:flex; gap:14px; overflow:auto; scroll-snap-type:x mandatory; padding-bottom:8px}
-    .t-card{flex:0 0 85%; scroll-snap-align:center; background:var(--card); border:1px solid rgba(15,23,42,.06); border-radius:var(--radius-sm); box-shadow:var(--shadow); padding:18px}
-    .t-stars{font-size:18px; letter-spacing:2px; color:#f59e0b}
-    .t-name{margin-top:10px; font-weight:700}
-
-    /* Contact */
-    .contact{padding:48px 0}
-    form{display:grid; gap:12px; background:var(--card); padding:18px; border-radius:var(--radius); border:1px solid rgba(15,23,42,.06); box-shadow:var(--shadow)}
-    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid #d1d5db; font:inherit}
-    input:focus, textarea:focus{outline:none; box-shadow:0 0 0 4px var(--ring); border-color:var(--brand)}
-    textarea{min-height:120px; resize:vertical}
-
-    /* Footer */
-    footer{padding:24px 0; text-align:center; color:var(--muted)}
-
-    /* Media Queries */
-    @media (min-width: 768px){
-      .links{display:flex}
-      .menu-btn{display:none}
-      .hero{padding:46px 0 54px}
-      .hero-grid{grid-template-columns: 1.1fr 1fr; align-items:center}
-      .slide{height:360px}
-      .about-grid{grid-template-columns: 1fr 1fr; align-items:center}
-      .about-img{height:100%}
-      .t-card{flex-basis: 360px}
-      .t-row{padding:6px}
+    header.scrolled{
+      background: rgba(255,255,255,0.98);
+      color:var(--accent);
+      box-shadow: 0 6px 30px rgba(11,132,255,0.08);
+      border-bottom:1px solid rgba(8,15,30,0.04);
     }
 
-    @media (min-width: 1024px){
-      .slide{height:420px}
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width:0;
     }
+    .logo{
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(135deg,#ffffff33,#ffffff22);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:white;font-size:18px;box-shadow:var(--soft-shadow);
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .brand .title{
+      font-weight:700;font-size:18px;white-space:nowrap;
+      overflow:hidden;text-overflow:ellipsis;
+      max-width:200px;
+    }
+
+    /* NAV */
+    nav{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    nav .nav-links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    nav a{
+      color:inherit;
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:8px;
+      transition:all .18s ease;
+    }
+    header.scrolled nav a{ color:var(--accent) }
+    nav a:hover{ transform:translateY(-2px); background:rgba(255,255,255,0.06) }
+
+    .cta{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      padding:8px 12px;border-radius:10px;color:white;font-weight:700;
+      box-shadow: 0 6px 18px rgba(11,132,255,0.18);
+    }
+
+    /* mobile hamburger */
+    .hamburger{
+      display:none;
+      width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;
+      cursor:pointer;background:transparent;border:none;color:inherit;font-size:20px;
+    }
+
+    /* main layout */
+    main{
+      max-width:var(--max-w);
+      margin:0 auto;
+      padding: calc(var(--header-h) + 28px) 18px 80px;
+    }
+
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 480px;
+      gap:28px;
+      align-items:center;
+      margin-bottom:28px;
+    }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.75));
+      border-radius:var(--card-radius);
+      padding:28px;
+      box-shadow:var(--soft-shadow);
+      border:1px solid rgba(10,15,25,0.04);
+    }
+    .hero h1{ margin:0 0 8px; font-size:28px; color:var(--accent); }
+    .hero p.lead{ margin:8px 0 18px; color:#0b2433; font-size:16px; }
+    .contact-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+    .pill{
+      display:inline-flex; gap:10px; align-items:center; padding:10px 12px; border-radius:999px;
+      background:linear-gradient(90deg, #ffffff, rgba(255,255,255,0.8));
+      box-shadow: 0 6px 20px rgba(8,20,40,0.05);
+      font-weight:600;
+      border:1px solid rgba(8,20,40,0.03);
+    }
+    .pill svg{ width:16px; height:16px; opacity:0.9 }
+
+    .actions{ margin-top:18px; display:flex; gap:12px; flex-wrap:wrap }
+    .btn{
+      padding:12px 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:white;
+      box-shadow: 0 8px 24px rgba(11,132,255,0.12);
+    }
+    .btn.secondary{ background:white; color:var(--accent); border:1px solid rgba(10,15,25,0.06) }
+
+    /* CAROUSEL (doctors) */
+    .carousel{
+      position:relative;
+      border-radius:var(--card-radius);
+      overflow:hidden;
+      height:360px;
+      box-shadow:var(--soft-shadow);
+      border:1px solid rgba(10,15,25,0.04);
+      background:linear-gradient(180deg,#f8feff, #e9f9ff);
+    }
+    .slides{
+      display:flex;
+      height:100%;
+      transition:transform .5s cubic-bezier(.2,.9,.25,1);
+      will-change:transform;
+      touch-action:pan-y;
+    }
+    .slide{
+      min-width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .slide img{
+      width:100%;height:100%;object-fit:cover; display:block;
+    }
+    .carousel .nav-btn{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:42px;height:42px;border-radius:999px;border:none;background:rgba(6,20,38,0.32);
+      color:white;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+      backdrop-filter: blur(6px);
+    }
+    .nav-btn.left{ left:12px }
+    .nav-btn.right{ right:12px }
+
+    .indicators{
+      position:absolute;left:50%;transform:translateX(-50%);
+      bottom:12px;display:flex;gap:8px;
+    }
+    .dot{ width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.6); cursor:pointer }
+    .dot.active{ background:white; width:10px; height:10px; box-shadow:0 4px 14px rgba(3,20,40,0.18) }
+
+    /* ABOUT / TESTIMONIALS / CONTACT */
+    section.h-section{ margin:26px 0 }
+    .section-title{ font-size:20px;color:var(--accent); margin-bottom:14px; font-weight:700 }
+
+    /* TESTIMONIALS: scroll-snap */
+    .testimonials-wrap{
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      padding-bottom:12px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .testimonial{
+      min-width:260px;
+      max-width:320px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+      border-radius:14px; padding:16px; box-shadow:var(--soft-shadow);
+      border:1px solid rgba(8,20,40,0.03);
+      scroll-snap-align:center;
+      display:flex;flex-direction:column;gap:10px;
+    }
+    .testimonial p{ margin:0; color:#12313f }
+    .testimonial .who{ font-weight:700;color:var(--accent); font-size:14px; }
+
+    /* SERVICES SECTION */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    
+    .service-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(11,132,255,0.08);
+      border: 1px solid rgba(11,132,255,0.06);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      cursor: pointer;
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(11,132,255,0.12);
+      border-color: rgba(11,132,255,0.12);
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .service-image {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+      background: #f8feff;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    
+    .service-card:hover .service-image img {
+      transform: scale(1.08);
+    }
+    
+    .service-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,132,255,0.1), rgba(0,180,216,0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .service-card:hover .service-image::after {
+      opacity: 1;
+    }
+    
+    .service-content {
+      padding: 20px 18px;
+    }
+    
+    .service-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.3;
+    }
+    
+    .service-icon {
+      width: 22px;
+      height: 22px;
+      color: var(--accent-2);
+      flex-shrink: 0;
+    }
+    
+    .service-description {
+      color: #2c5aa0;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0 0 14px 0;
+    }
+    
+    .service-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    
+    .feature-tag {
+      background: linear-gradient(90deg, rgba(11,132,255,0.08), rgba(0,180,216,0.06));
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid rgba(11,132,255,0.1);
+      white-space: nowrap;
+    }
+    
+    .service-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 13px;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: all 0.2s ease;
+    }
+    
+    .service-cta:hover {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+    
+    .service-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+    
+    .service-cta:hover svg {
+      transform: translateX(2px);
+    }
+
+    /* CONTACT FORM */
+    .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-card{ background:var(--glass-bg); padding:16px;border-radius:12px;box-shadow:var(--soft-shadow);
+      border:1px solid rgba(8,20,40,0.03);
+    }
+    input,textarea{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(8,20,40,0.06);margin-bottom:8px;
+      font-size:14px;
+    }
+    textarea{ min-height:140px; resize:vertical; }
+
+    footer{
+      margin-top:36px;padding:22px;text-align:center;color:#024164;font-weight:600;
+    }
+
+    /* Responsive Design - Mobile First Approach */
+    
+    /* Large Desktop (1200px+) */
+    @media (min-width: 1200px) {
+      main { padding: calc(var(--header-h) + 32px) 20px 100px; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .section-title { font-size: 24px; }
+    }
+    
+    /* Desktop (1024px - 1199px) */
+    @media (max-width: 1199px) and (min-width: 1024px) {
+      .hero { grid-template-columns: 1fr 400px; }
+      .carousel { height: 340px; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    }
+    
+    /* Tablet Landscape (981px - 1023px) */
+    @media (max-width: 1023px) and (min-width: 981px) {
+      .hero { grid-template-columns: 1fr 360px; }
+      .carousel { height: 320px; }
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      main { padding: calc(var(--header-h) + 24px) 18px 80px; }
+    }
+    
+    /* Tablet Portrait (768px - 980px) */
+    @media (max-width: 980px) and (min-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 20px; }
+      .carousel { height: 300px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+      
+      /* Optimize hero for tablets */
+      .hero-card { padding: 24px; }
+      .hero h1 { font-size: 26px; }
+      .hero p.lead { font-size: 15px; }
+      
+      /* Testimonials tablet optimization */
+      .testimonial { min-width: 280px; max-width: 350px; }
+    }
+    
+    /* Mobile Large (481px - 767px) */
+    @media (max-width: 767px) {
+      /* Header mobile optimization */
+      header { padding: 10px 16px; }
+      .hamburger { display: flex; }
+      nav .nav-links { display: none; }
+      .brand .title { font-size: 16px; max-width: 150px; }
+      
+      /* Main content mobile */
+      main { padding: calc(var(--header-h) + 20px) 16px 80px; }
+      
+      /* Hero mobile */
+      .hero { grid-template-columns: 1fr; gap: 18px; }
+      .hero-card { padding: 20px; }
+      .hero h1 { font-size: 24px; }
+      .hero p.lead { font-size: 14px; }
+      .carousel { height: 280px; }
+      
+      /* Contact row mobile */
+      .contact-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .pill { padding: 8px 10px; font-size: 14px; }
+      
+      /* Actions mobile */
+      .actions { flex-direction: column; width: 100%; }
+      .btn { width: 100%; text-align: center; padding: 14px 16px; }
+      
+      /* Services mobile */
+      .services-grid { grid-template-columns: 1fr; gap: 16px; }
+      .service-card:hover { transform: translateY(-3px); }
+      .service-image { height: 180px; }
+      .service-content { padding: 18px 16px; }
+      .service-title { font-size: 16px; gap: 8px; }
+      .service-icon { width: 20px; height: 20px; }
+      .service-description { font-size: 13px; line-height: 1.4; }
+      .service-features { gap: 5px; }
+      .feature-tag { padding: 3px 7px; font-size: 10px; }
+      .service-cta { font-size: 12px; gap: 5px; }
+      .service-cta svg { width: 12px; height: 12px; }
+      
+      /* Contact mobile */
+      .contact-grid { grid-template-columns: 1fr; gap: 16px; }
+      .form-card { padding: 18px; }
+      
+      /* Testimonials mobile */
+      .testimonial { min-width: 250px; max-width: 300px; padding: 14px; }
+      
+      /* Section titles mobile */
+      .section-title { font-size: 20px; margin-bottom: 16px; }
+    }
+    
+    /* Mobile Medium (376px - 480px) */
+    @media (max-width: 480px) {
+      /* Header extra small */
+      header { padding: 8px 14px; }
+      .brand .title { font-size: 15px; max-width: 120px; }
+      .logo { width: 40px; height: 40px; font-size: 16px; }
+      
+      /* Main content extra small */
+      main { padding: calc(var(--header-h) + 16px) 14px 60px; }
+      
+      /* Hero extra small */
+      .hero-card { padding: 18px; }
+      .hero h1 { font-size: 22px; }
+      .hero p.lead { font-size: 13px; }
+      .carousel { height: 240px; }
+      
+      /* Pills extra small */
+      .pill { padding: 6px 8px; font-size: 12px; }
+      .pill svg { width: 14px; height: 14px; }
+      
+      /* Services extra small */
+      .services-grid { gap: 14px; }
+      .service-image { height: 160px; }
+      .service-content { padding: 16px 14px; }
+      .service-title { font-size: 15px; gap: 6px; }
+      .service-icon { width: 18px; height: 18px; }
+      .service-description { font-size: 12px; margin-bottom: 12px; }
+      .service-features { gap: 4px; margin-bottom: 12px; }
+      .feature-tag { padding: 2px 6px; font-size: 9px; }
+      .service-cta { font-size: 11px; gap: 4px; }
+      .service-cta svg { width: 10px; height: 10px; }
+      
+      /* Form extra small */
+      .form-card { padding: 16px; }
+      input, textarea { padding: 10px; font-size: 13px; }
+      .btn { padding: 12px 14px; font-size: 14px; }
+      
+      /* Testimonials extra small */
+      .testimonial { min-width: 220px; max-width: 280px; padding: 12px; }
+      .testimonial p { font-size: 13px; }
+      .testimonial .who { font-size: 12px; }
+      
+      /* Section titles extra small */
+      .section-title { font-size: 18px; margin-bottom: 14px; }
+    }
+    
+    /* Mobile Small (≤375px) */
+    @media (max-width: 375px) {
+      :root { --header-h: 60px; }
+      
+      /* Header tiny */
+      header { padding: 6px 12px; }
+      .brand .title { font-size: 14px; max-width: 100px; }
+      .logo { width: 36px; height: 36px; font-size: 14px; }
+      
+      /* Main content tiny */
+      main { padding: calc(var(--header-h) + 14px) 12px 50px; }
+      
+      /* Hero tiny */
+      .hero-card { padding: 16px; }
+      .hero h1 { font-size: 20px; }
+      .hero p.lead { font-size: 12px; }
+      .carousel { height: 200px; }
+      
+      /* Contact row tiny */
+      .contact-row { gap: 6px; }
+      .pill { padding: 5px 7px; font-size: 11px; }
+      
+      /* Services tiny */
+      .services-grid { gap: 12px; }
+      .service-image { height: 140px; }
+      .service-content { padding: 14px 12px; }
+      .service-title { font-size: 14px; gap: 5px; }
+      .service-icon { width: 16px; height: 16px; }
+      .service-description { font-size: 11px; }
+      .feature-tag { padding: 2px 5px; font-size: 8px; }
+      .service-cta { font-size: 10px; gap: 3px; }
+      .service-cta svg { width: 9px; height: 9px; }
+      
+      /* Form tiny */
+      .form-card { padding: 14px; }
+      input, textarea { padding: 8px; font-size: 12px; }
+      .btn { padding: 10px 12px; font-size: 13px; }
+      
+      /* Testimonials tiny */
+      .testimonial { min-width: 200px; max-width: 250px; padding: 10px; }
+      .testimonial p { font-size: 12px; line-height: 1.3; }
+      .testimonial .who { font-size: 11px; }
+      
+      /* Section titles tiny */
+      .section-title { font-size: 16px; margin-bottom: 12px; }
+      
+      /* WhatsApp button tiny */
+      .whatsapp-float { width: 50px; height: 50px; font-size: 24px; }
+    }
+
+    /* Additional tablet breakpoint for services */
+    @media (max-width:960px) and (min-width:781px){
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+    }
+
+    @media (max-width:520px){
+      main{ padding: calc(var(--header-h) + 16px) 14px 60px; }
+      
+      /* Further optimize services for small phones */
+      .services-grid {
+        gap: 12px;
+      }
+      
+      .service-image {
+        height: 140px;
+      }
+      
+      .service-content {
+        padding: 14px 12px;
+      }
+      
+      .service-title {
+        font-size: 15px;
+        gap: 6px;
+      }
+      
+      .service-icon {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .service-description {
+        font-size: 11px;
+        line-height: 1.3;
+        margin-bottom: 10px;
+      }
+      
+      .service-features {
+        gap: 3px;
+        margin-bottom: 12px;
+      }
+      
+      .feature-tag {
+        padding: 2px 5px;
+        font-size: 9px;
+      }
+      
+      .service-cta {
+        font-size: 11px;
+        gap: 3px;
+      }
+      
+      .service-cta svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    @media (max-width:420px){
+      :root{ --header-h:64px }
+      .carousel{ height:240px }
+      .hero h1{ font-size:22px }
+      .brand .title{ max-width:120px }
+      
+      /* Ultra small screens */
+      .section-title{ font-size:18px }
+      .service-image {
+        height: 120px;
+      }
+      .service-content {
+        padding: 12px 10px;
+      }
+    }
+     /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1001;
+      transition: 0.3s;
+    }
+    .whatsapp-float:hover {
+      background: #1ebe5d;
+    }
+
   </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
-  <!-- Header / Nav -->
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- Tooth icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 7.5c0 3-1.5 4.5-2.25 6.75-.75 2.25-1.125 5.25-2.25 6-.75.5-1.5 0-2.25-.75s-1.5-1.5-2.25-.75-1.5 1.25-2.25.75c-1.125-.75-1.5-3.75-2.25-6C5.25 12 3.75 10.5 3.75 7.5A5.75 5.75 0 0 1 9.5 1.75h5A5.75 5.75 0 0 1 20.25 7.5Z"/></svg>
-        </div>
-        <span>CM Dental Clinics</span>
+
+  <header id="siteHeader" aria-label="Main header">
+    <div class="brand" role="banner">
+      <div class="logo" aria-hidden="true">CM</div>
+      <div class="title">CM Dental Clinics</div>
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <div class="nav-links" role="menubar">
+        <a href="#home" role="menuitem">Home</a>
+        <a href="#about" role="menuitem">About</a>
+        <a href="#services" role="menuitem">Services</a>
+        <a href="#testimonials" role="menuitem">Testimonials</a>
+        <a href="#contact" role="menuitem">Contact</a>
+        <a class="cta" href="tel:+6381443149" role="button">Call +91 63814 43149</a>
       </div>
 
-      <nav class="links" aria-label="Primary">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <button class="menu-btn" aria-label="Open menu" id="menuBtn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <!-- Mobile Hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        &#9776;
       </button>
-    </div>
 
-    <!-- Mobile Drawer -->
-    <div class="mobile-drawer" id="drawer" aria-label="Mobile menu" hidden>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact</a>
-    </div>
+      <!-- Mobile full-screen menu --
+      <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+        <a href="#home" data-close>Home</a>
+        <a href="#about" data-close>About</a>
+        <a href="#testimonials" data-close>Testimonials</a>
+        <a href="#contact" data-close>Contact</a>
+        <a class="cta" href="tel:+919876543210">Call +91 98765 43210</a>
+      </div>>-- Mobile full-screen menu -->
+    </nav>
   </header>
 
-  <!-- Hero / Home -->
-  <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="pill">Trusted Care • Advanced Dentistry</span>
-        <h1>Gentle, modern dental care for every smile</h1>
-        <p class="lead">From routine checkups to cosmetic dentistry, our specialists use the latest technology to keep your smile healthy and bright.</p>
-        <div class="contact-bar" aria-label="Clinic contact details">
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.45-1.14a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
-            <span>+91 98949 57985</span>
+  <main>
+    <!-- HOME / HERO -->
+    <section id="home" class="hero-card hero">
+      <div class="hero-card">
+        <h1>CM Dental Clinics</h1>
+        <p class="lead">Compassionate dental care using the latest technology — from routine cleaning to cosmetic and restorative dentistry.</p>
+
+        <div class="contact-row">
+          <div class="pill" title="Phone">
+            <!-- phone svg -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92V20a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2 4.18 2 2 0 0 1 4 2h3.09a2 2 0 0 1 2 1.72c.12 1.05.34 2.08.65 3.04a2 2 0 0 1-.45 2.11L8.91 11.09a15.05 15.05 0 0 0 6 6l1.23-1.23a2 2 0 0 1 2.11-.45c.96.31 1.99.53 3.04.65A2 2 0 0 1 22 16.92z" fill="white"/></svg>
+            +91 98765 43210
           </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
-            <span>cmdental@gmail.com</span>
+
+          <div class="pill" title="Email">
+            <!-- mail svg -->
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h16v16H4z" fill="white" opacity=".0"/><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v11A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5v-11zM5 7v-.02M12 13.2l6.3-4.5" stroke="white" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            cmdental@gmail.com
           </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>188,Opp to Abhinandan Hosptial, Pollachi Rd., Sundarapuram, Coimbatore</span>
-          </div>
+
+          <div class="pill" title="Location">123, Green Street, Coimbatore</div>
         </div>
-        <div style="margin-top:16px">
-          <a href="#contact" class="btn btn-primary">Book Appointment</a>
+
+        <div class="actions">
+          <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+          <button class="btn secondary" onclick="window.location.href='#testimonials'">Read Reviews</button>
         </div>
       </div>
 
       <!-- Doctor Carousel -->
-      <div class="carousel" aria-roledescription="carousel" aria-label="Doctor images">
-        <div class="track" id="track">
-          <figure class="slide"><img src="cm1.jpg" alt="Dentist with patient in modern clinic" /></figure>
-          <figure class="slide"><img src="cm3.jpg" alt="Dental surgeon portrait" /></figure>
-          <figure class="slide"><img src="cm2.jpg" alt="Team of dental doctors" /></figure>
+      <div class="carousel" aria-roledescription="carousel" aria-label="Doctors carousel">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <img src="cm3.jpg" alt="Dr. Meera - Cosmetic Dentist">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f4ec1e153f8f7eea2a1b6b6f6b48b49" alt="Dr. Rao - Orthodontist">
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4aaf3f4b6e6f2b6b0c9f6d3f6dde5f42" alt="Dr. Arjun - Implant Specialist">
+          </div>
         </div>
-        <div class="ctrl">
-          <button id="prev" aria-label="Previous slide">‹</button>
-          <button id="next" aria-label="Next slide">›</button>
-        </div>
-        <div class="dots" id="dots" aria-hidden="true"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container about-grid">
-      <div class="about-img">
-        <img src="cm4.jpeg" alt="CM Dental Clinics equipment" />
-      </div>
-      <article class="about-card">
-        <h2>About CM Dental Clinics</h2>
-        <p>We combine compassionate care with advanced technology to deliver exceptional results. From preventive check-ups to cosmetic dentistry and implants, our team ensures a comfortable experience at every visit.</p>
-        <ul>
-          <li>• Experienced specialists & pain-free treatments</li>
-          <li>• Digital X‑rays, intraoral scanners & sterilization protocols</li>
-          <li>• Flexible timings & emergency slots</li>
-        </ul>
-      </article>
-    </div>
-  </section>
+        <button class="nav-btn left" id="prevBtn" aria-label="Previous slide">&#10094;</button>
+        <button class="nav-btn right" id="nextBtn" aria-label="Next slide">&#10095;</button>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="testimonials">
-    <div class="container">
-      <h2 style="margin:0 0 14px">What Our Patients Say</h2>
-      <div class="t-row" aria-label="Testimonials (horizontal scroll on mobile)">
-        <div class="t-card">
-          <div class="t-stars">★★★★★</div>
-          <p>“The best dental experience I’ve had. Friendly team and spotless clinic!”</p>
-          <div class="t-name">— Arjun K.</div>
+        <div class="indicators" id="indicators" aria-hidden="false"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="h-section">
+      <div class="section-title">About CM Dental Clinics</div>
+      <div class="hero-card">
+        <p>We provide compassionate, evidence-based dentistry with an emphasis on comfort. Our team specializes in preventive care, cosmetic dentistry, orthodontics, dental implants and emergency treatments using industry-standard sterilization and modern equipment.</p>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="h-section">
+      <div class="section-title">Our Dental Services</div>
+      <p style="color:#2c5aa0; margin-bottom:24px; font-size:16px;">Comprehensive dental care with modern technology and experienced professionals</p>
+      
+      <div class="services-grid">
+        <!-- Root Canal Therapy -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Root Canal.jpeg" alt="Root Canal Therapy">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-tooth service-icon"></i>
+              Root Canal Therapy
+            </h3>
+            <p class="service-description">
+              Pain-free root canal treatment using advanced techniques to save your natural tooth and eliminate infection.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Pain Relief</span>
+              <span class="feature-tag">Tooth Preservation</span>
+              <span class="feature-tag">Advanced Equipment</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Book Consultation
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="t-card">
-          <div class="t-stars">★★★★★</div>
-          <p>“They explained everything clearly and made me feel relaxed throughout.”</p>
-          <div class="t-name">— Priya M.</div>
+
+        <!-- Impaction/Extraction -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Extraction.jpeg" alt="Tooth Extraction">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-medical-kit service-icon"></i>
+              Impaction/Extraction
+            </h3>
+            <p class="service-description">
+              Safe and comfortable tooth extraction including wisdom teeth removal with minimal discomfort.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Wisdom Teeth</span>
+              <span class="feature-tag">Surgical Extraction</span>
+              <span class="feature-tag">Post-Care Support</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Schedule Appointment
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="t-card">
-          <div class="t-stars">★★★★★</div>
-          <p>“Painless root canal and quick recovery. Highly recommended.”</p>
-          <div class="t-name">— Karthik R.</div>
+
+        <!-- Braces -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Braces.jpeg" alt="Dental Braces">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-grip-lines service-icon"></i>
+              Braces
+            </h3>
+            <p class="service-description">
+              Traditional and clear braces to straighten teeth and create beautiful, confident smiles for all ages.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Metal Braces</span>
+              <span class="feature-tag">Clear Aligners</span>
+              <span class="feature-tag">Regular Adjustments</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Free Consultation
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
-        <div class="t-card">
-          <div class="t-stars">★★★★★</div>
-          <p>“Great with kids—my daughter loves her dentist now!”</p>
-          <div class="t-name">— Meera S.</div>
+
+        <!-- Crown / Bridges -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="bridge.jpeg" alt="Dental Crown">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-crown service-icon"></i>
+              Crown / Bridges
+            </h3>
+            <p class="service-description">
+              High-quality crowns and bridges to restore damaged teeth and replace missing ones with natural appearance.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Porcelain Crown</span>
+              <span class="feature-tag">Bridge Work</span>
+              <span class="feature-tag">Natural Look</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Get Quote
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dental Implants -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Implants.jpeg" alt="Dental Implants">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-plus-circle service-icon"></i>
+              Dental Implants
+            </h3>
+            <p class="service-description">
+              Permanent tooth replacement solution with titanium implants that look and function like natural teeth.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Titanium Implants</span>
+              <span class="feature-tag">Permanent Solution</span>
+              <span class="feature-tag">Natural Function</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Learn More
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Filling & Restoration -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Filling.jpeg" alt="Dental Filling">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-fill-drip service-icon"></i>
+              Filling & Restoration
+            </h3>
+            <p class="service-description">
+              Tooth-colored fillings and restorations to repair cavities and restore your teeth's natural strength.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Composite Fillings</span>
+              <span class="feature-tag">Cavity Treatment</span>
+              <span class="feature-tag">Color Matching</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Book Visit
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Scaling & Polishing -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Polishing.jpeg" alt="Teeth Cleaning">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-sparkles service-icon"></i>
+              Scaling & Polishing
+            </h3>
+            <p class="service-description">
+              Professional teeth cleaning to remove plaque, tartar and stains for healthier gums and brighter smile.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Deep Cleaning</span>
+              <span class="feature-tag">Stain Removal</span>
+              <span class="feature-tag">Gum Health</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Book Cleaning
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Full Mouth Rehabilitation -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Rehabiliation.jpeg" alt="Full Mouth Rehabilitation">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-redo-alt service-icon"></i>
+              Full Mouth Rehabilitation
+            </h3>
+            <p class="service-description">
+              Comprehensive treatment plan to restore function, health and aesthetics of your entire mouth.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Complete Makeover</span>
+              <span class="feature-tag">Function Restore</span>
+              <span class="feature-tag">Custom Plan</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Consultation
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Smile Designing -->
+        <div class="service-card">
+          <div class="service-image">
+            <img src="Smile correction.jpeg" alt="Smile Designing">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">
+              <i class="fas fa-smile service-icon"></i>
+              Smile Designing
+            </h3>
+            <p class="service-description">
+              Cosmetic dentistry treatments including veneers, whitening and contouring for your perfect smile.
+            </p>
+            <div class="service-features">
+              <span class="feature-tag">Veneers</span>
+              <span class="feature-tag">Teeth Whitening</span>
+              <span class="feature-tag">Cosmetic Design</span>
+            </div>
+            <a href="#contact" class="service-cta">
+              Transform Smile
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <div class="container" style="display:grid; gap:18px; grid-template-columns:1fr; align-items:start">
-      <div>
-        <h2>Contact Us</h2>
-        <p class="lead">Have a question or need an appointment? Send us a message and we’ll get back to you shortly.</p>
-        <form id="contactForm" novalidate>
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
-          <input type="tel" name="phone" placeholder="Phone (optional)" />
-          <textarea name="message" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="h-section">
+      <div class="section-title">What Our Patients Say</div>
+
+      <div class="testimonials-wrap" role="list" aria-label="Patient testimonials">
+        <article class="testimonial" role="listitem">
+          <p>"I was nervous before my root canal but the team made it pain-free and explained each step. Highly recommended."</p>
+          <div class="who">— Arjun K.</div>
+        </article>
+
+        <article class="testimonial" role="listitem">
+          <p>"Beautiful clinic, friendly staff and modern equipment. My smile looks fantastic after the veneers!"</p>
+          <div class="who">— Priya M.</div>
+        </article>
+
+        <article class="testimonial" role="listitem">
+          <p>"Quick appointment, professional dentist and helpful aftercare. No more dental anxiety for me."</p>
+          <div class="who">— Karthik R.</div>
+        </article>
+
+        <article class="testimonial" role="listitem">
+          <p>"Affordable and great results. They followed up and ensured I was comfortable post-procedure."</p>
+          <div class="who">— Kavya S.</div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="container">© 2025 CM Dental Clinics — All rights reserved.</div>
-  </footer>
+    <!--whatsapp-->
+     <a href="https://wa.me/6381443149?text=Hello%20CM%20dental%20care" target="_blank" class="whatsapp-float">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="h-section">
+      <div class="section-title">Contact & Appointment</div>
+
+      <div class="contact-grid">
+        <div class="form-card" style="grid-column:1/1;">
+          <form id="contactForm">
+            <input type="text" id="name" placeholder="Your name" required />
+            <input type="email" id="email" placeholder="Email address" required />
+            <input type="tel" id="phone" placeholder="Phone number" />
+            <textarea id="message" placeholder="Tell us briefly about your concern" required></textarea>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn" type="submit">Send Message</button>
+              <button class="btn secondary" type="button" onclick="window.location.href='tel:+919876543210'">Call Clinic</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="form-card">
+  <strong>Clinic Details</strong>
+  <p style="margin-top:8px">
+    CM Dental Clinics<br/>123, Green Street, Coimbatore
+  </p>
+  <p>
+    <strong>Phone:</strong> +91 98765 43210<br/>
+    <strong>Email:</strong> cmdental@gmail.com
+  </p>
+
+  <div style="margin-top:12px">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2851.13164025043!2d76.9738483!3d10.9544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85bee3cb47d6f%3A0x362e40c5ffb1862!2sCm%20dental%20care!5e1!3m2!1sen!2sin!4v1756627020980!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> CM Dental Clinics • All rights reserved
+    </footer>
+  </main>
 
   <script>
-    // ===== Mobile Drawer =====
-    const menuBtn = document.getElementById('menuBtn');
-    const drawer = document.getElementById('drawer');
-    menuBtn.addEventListener('click', () => {
-      const isOpen = drawer.style.display === 'block';
-      drawer.style.display = isOpen ? 'none' : 'block';
-      drawer.hidden = isOpen;
-    });
-    drawer.addEventListener('click', (e)=>{
-      if(e.target.matches('a')){ drawer.style.display='none'; drawer.hidden=true; }
+    // Header scroll change
+    const header = document.getElementById('siteHeader');
+    window.addEventListener('scroll', ()=> {
+      if(window.scrollY > 10) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     });
 
-    // ===== Active link on scroll =====
-    const sections = ['home','about','testimonials','contact'].map(id=>document.getElementById(id));
-    const navLinks = Array.from(document.querySelectorAll('.links a'));
-    const setActive = () => {
-      let current = 'home';
-      for(const sec of sections){
-        const rect = sec.getBoundingClientRect();
-        if(rect.top <= window.innerHeight * 0.33) current = sec.id;
-      }
-      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-    };
-    document.addEventListener('scroll', setActive, {passive:true});
-    setActive();
-
-    // ===== Carousel (touch-friendly) =====
-    const track = document.getElementById('track');
-    const slides = Array.from(track.children);
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-    const dotsWrap = document.getElementById('dots');
-
-    let index = 0; let auto;
-    const createDots = () => {
-      slides.forEach((_,i)=>{
-        const b = document.createElement('button');
-        b.setAttribute('aria-label', 'Go to slide ' + (i+1));
-        b.addEventListener('click', ()=>{ index=i; update(); restartAuto(); });
-        dotsWrap.appendChild(b);
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', ()=>{
+      const open = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('[data-close]').forEach(a=>{
+      a.addEventListener('click', ()=> {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded','false');
+        mobileMenu.setAttribute('aria-hidden','true');
       });
-    };
-    const update = () => {
-      const width = track.clientWidth; // responsive width
-      track.style.transform = `translateX(${-index * width}px)`;
-      Array.from(dotsWrap.children).forEach((d,i)=>d.classList.toggle('active', i===index));
-    };
-    const clampIndex = () => { if(index < 0) index = slides.length-1; if(index >= slides.length) index = 0; };
-    const nextSlide = () => { index++; clampIndex(); update(); };
-    const prevSlide = () => { index--; clampIndex(); update(); };
-
-    next.addEventListener('click', ()=>{ nextSlide(); restartAuto(); });
-    prev.addEventListener('click', ()=>{ prevSlide(); restartAuto(); });
-
-    // Swipe support
-    let startX = 0, dx = 0, dragging = false;
-    track.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; dragging = true; dx = 0; }, {passive:true});
-    track.addEventListener('touchmove', (e)=>{ if(!dragging) return; dx = e.touches[0].clientX - startX; }, {passive:true});
-    track.addEventListener('touchend', ()=>{
-      dragging = false;
-      if(Math.abs(dx) > 40){ dx < 0 ? nextSlide() : prevSlide(); restartAuto(); }
     });
 
-    // Auto-play
-    const startAuto = () => auto = setInterval(nextSlide, 4500);
-    const stopAuto = () => clearInterval(auto);
-    const restartAuto = () => { stopAuto(); startAuto(); };
+    // Simple Carousel for doctors with touch support
+    (function(){
+      const slidesEl = document.getElementById('slides');
+      const slides = slidesEl.querySelectorAll('.slide');
+      const prev = document.getElementById('prevBtn');
+      const next = document.getElementById('nextBtn');
+      const indicators = document.getElementById('indicators');
+      const total = slides.length;
+      let idx = 0;
+      let width = slidesEl.clientWidth;
+      let autoTimer = null;
+      let isDragging=false, startX=0, currentTranslate=0, prevTranslate=0, animationID=0;
 
-    // Resize handler to keep widths exact on orientation change
-    window.addEventListener('resize', update);
+      // build indicators
+      for(let i=0;i<total;i++){
+        const d = document.createElement('div');
+        d.className='dot' + (i===0? ' active':'');
+        d.dataset.idx = i;
+        d.addEventListener('click', ()=> goTo(i));
+        indicators.appendChild(d);
+      }
 
-    // Init
-    createDots();
-    update();
-    startAuto();
+      function update(){
+        slidesEl.style.transform = `translateX(${-idx * 100}%)`;
+        indicators.querySelectorAll('.dot').forEach((d, i)=> d.classList.toggle('active', i===idx));
+      }
+      function goTo(i){
+        idx = (i + total) % total;
+        update();
+        resetAuto();
+      }
+      prev.addEventListener('click', ()=> { goTo(idx-1) });
+      next.addEventListener('click', ()=> { goTo(idx+1) });
 
-    // ===== Contact form (demo) =====
-    document.getElementById('contactForm').addEventListener('submit', (e)=>{
+      // auto slide
+      function startAuto(){ autoTimer = setInterval(()=> goTo(idx+1), 4200); }
+      function resetAuto(){ clearInterval(autoTimer); startAuto(); }
+      startAuto();
+
+      // pointer / touch handling (for swipe)
+      slidesEl.addEventListener('pointerdown', pointerDown);
+      slidesEl.addEventListener('pointermove', pointerMove);
+      window.addEventListener('pointerup', pointerUp);
+      slidesEl.addEventListener('pointercancel', pointerUp);
+      slidesEl.addEventListener('pointerleave', pointerUp);
+
+      function pointerDown(e){
+        isDragging = true;
+        startX = e.clientX;
+        slidesEl.style.transition = 'none';
+        clearInterval(autoTimer);
+      }
+      function pointerMove(e){
+        if(!isDragging) return;
+        const dx = e.clientX - startX;
+        slidesEl.style.transform = `translateX(${dx - idx * slidesEl.clientWidth}px)`;
+      }
+      function pointerUp(e){
+        if(!isDragging) return;
+        isDragging=false;
+        const dx = e.clientX - startX;
+        slidesEl.style.transition = '';
+        const threshold = slidesEl.clientWidth * 0.18;
+        if(Math.abs(dx) > threshold){
+          if(dx < 0) idx = Math.min(idx + 1, total - 1);
+          else idx = Math.max(idx - 1, 0);
+        }
+        update();
+        resetAuto();
+      }
+
+      // resize handler to keep consistent transform
+      window.addEventListener('resize', ()=> update());
+    })();
+
+    // Testimonials: small enhancement to show scrollbar hint on desktop
+    (function(){
+      const wrap = document.querySelector('.testimonials-wrap');
+      if(wrap){
+        wrap.addEventListener('wheel', (evt)=>{
+          if(Math.abs(evt.deltaY) > 0 && !evt.ctrlKey){
+            evt.preventDefault();
+            wrap.scrollLeft += evt.deltaY + evt.deltaX;
+          }
+        }, {passive:false});
+      }
+    })();
+
+    // Contact form simple handler
+    document.getElementById('contactForm').addEventListener('submit', function(e){
       e.preventDefault();
-      alert('Thank you! Your message has been sent.');
-      e.target.reset();
+      // typically send to server here; for demo just show success
+      alert('Thanks, ' + (document.getElementById('name').value || 'there') + '! We received your message and will contact you soon.');
+      this.reset();
+      document.getElementById('name').focus();
+    });
+
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll poly for older browsers - anchor links in mobile menu
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){
+        const t = this.getAttribute('href');
+        if(t.length>1 && document.querySelector(t)){
+          e.preventDefault();
+          document.querySelector(t).scrollIntoView({behavior:'smooth', block:'start'});
+          // close mobile menu if open
+          const mm = document.getElementById('mobileMenu');
+          if(mm.classList.contains('open')){ mm.classList.remove('open'); document.getElementById('hamburger').setAttribute('aria-expanded','false') }
+        }
+      });
     });
   </script>
+
 </body>
 </html>
