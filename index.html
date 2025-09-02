@@ -71,6 +71,13 @@
       display:flex;align-items:center;justify-content:center;
       font-weight:700;color:white;font-size:18px;box-shadow:var(--soft-shadow);
       border:1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s ease;
+    }
+    
+    header.scrolled .logo {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      border: 1px solid rgba(11,132,255,0.1);
     }
     .brand .title{
       font-weight:700;font-size:18px;white-space:nowrap;
@@ -142,6 +149,8 @@
       cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
       color:inherit;font-size:18px;z-index:1300;transition:all 0.2s ease;
       backdrop-filter: blur(5px);
+      flex-direction: column;
+      gap: 3px;
     }
     
     .hamburger:hover {
@@ -152,6 +161,26 @@
     .hamburger.open {
       background: rgba(255,255,255,0.2);
       transform: rotate(90deg);
+    }
+    
+    .hamburger-line {
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 1px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger.open .hamburger-line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.open .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.open .hamburger-line:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
     }
     
     /* Mobile menu styles */
@@ -803,10 +832,22 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       cursor: pointer;
       z-index: 1001;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      animation: whatsappJump 3s ease-in-out infinite;
+      text-decoration: none;
     }
     .whatsapp-float:hover {
       background: #1ebe5d;
+      transform: scale(1.1);
+      animation-play-state: paused;
+    }
+    
+    @keyframes whatsappJump {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      15% { transform: translateY(-8px) scale(1.05); }
+      30% { transform: translateY(0px) scale(1); }
+      45% { transform: translateY(-4px) scale(1.02); }
+      60% { transform: translateY(0px) scale(1); }
     }
 
     /* Enhanced Dental Animations & Graphics */
@@ -1197,11 +1238,9 @@
         
         <!-- Mobile Hamburger -->
         <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span class="hamburger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
         </button>
       </div>
 
@@ -1229,7 +1268,6 @@
             <span>Contact</span>
           </a>
           <a class="cta" href="tel:+6381443149" data-close>
-            <i class="fas fa-phone"></i>
             <span>Call +91 63814 43149</span>
           </a>
         </div>
