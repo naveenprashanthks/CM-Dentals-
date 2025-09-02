@@ -106,11 +106,146 @@
       box-shadow: 0 6px 18px rgba(11,132,255,0.18);
     }
 
+    /* Mobile navigation section */
+    .mobile-nav-section {
+      display: none;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    /* Mobile call button - always visible on mobile */
+    .mobile-call {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .mobile-call:hover {
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.05);
+    }
+    
     /* mobile hamburger */
     .hamburger{
       display:none;
-      width:44px;height:44px;border-radius:10px;align-items:center;justify-content:center;
-      cursor:pointer;background:transparent;border:none;color:inherit;font-size:20px;
+      width:40px;height:40px;border-radius:8px;align-items:center;justify-content:center;
+      cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+      color:inherit;font-size:18px;z-index:1300;transition:all 0.2s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .hamburger:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+    }
+    
+    .hamburger.open {
+      background: rgba(255,255,255,0.2);
+      transform: rotate(90deg);
+    }
+    
+    /* Mobile menu styles */
+    .mobile-menu {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(11,132,255,0.98), rgba(0,180,216,0.95));
+      backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(11,132,255,0.2);
+      padding: 20px;
+      z-index: 1250;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      visibility: hidden;
+      max-height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+    }
+    
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .mobile-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 20px;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .mobile-menu a:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateX(5px);
+    }
+    
+    .mobile-menu a::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      transition: all 0.2s ease;
+    }
+    
+    .mobile-menu a:hover::before {
+      background: white;
+      transform: scale(1.5);
+    }
+    
+    .mobile-menu .cta {
+      background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+      border: 2px solid rgba(255,255,255,0.3);
+      margin-top: 16px;
+      text-align: center;
+      font-size: 15px;
+      padding: 18px 20px;
+      justify-content: center;
+    }
+    
+    .mobile-menu .cta::before {
+      content: '📞';
+      margin-right: 8px;
+    }
+    
+    .mobile-menu .cta:hover {
+      background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.2));
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
     }
 
     /* main layout */
@@ -432,6 +567,7 @@
     @media (max-width: 767px) {
       /* Header mobile optimization */
       header { padding: 10px 16px; }
+      .mobile-nav-section { display: flex; }
       .hamburger { display: flex; }
       nav .nav-links { display: none; }
       .brand .title { font-size: 16px; max-width: 150px; }
@@ -650,7 +786,7 @@
         padding: 12px 10px;
       }
     }
-     /* WhatsApp Floating Button */
+    /* WhatsApp Floating Button */
     .whatsapp-float {
       position: fixed;
       width: 60px;
@@ -671,6 +807,362 @@
     }
     .whatsapp-float:hover {
       background: #1ebe5d;
+    }
+
+    /* Enhanced Dental Animations & Graphics */
+    @keyframes toothBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(-5deg); }
+      75% { transform: translateY(-5px) rotate(3deg); }
+    }
+    
+    @keyframes toothWiggle {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-3deg) scale(1.05); }
+      50% { transform: rotate(3deg) scale(0.95); }
+      75% { transform: rotate(-2deg) scale(1.02); }
+    }
+    
+    @keyframes toothGleam {
+      0%, 100% { filter: brightness(1) drop-shadow(0 0 0px rgba(255,255,255,0)); }
+      50% { filter: brightness(1.3) drop-shadow(0 0 10px rgba(255,255,255,0.8)); }
+    }
+    
+    @keyframes brushClean {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-8px) rotate(-10deg); }
+      50% { transform: translateX(8px) rotate(10deg); }
+      75% { transform: translateX(-4px) rotate(-5deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+    
+    @keyframes brushScrub {
+      0% { transform: translateY(0) rotate(0deg); }
+      10% { transform: translateY(-3px) rotate(5deg); }
+      20% { transform: translateY(2px) rotate(-3deg); }
+      30% { transform: translateY(-2px) rotate(4deg); }
+      40% { transform: translateY(1px) rotate(-2deg); }
+      50% { transform: translateY(-1px) rotate(3deg); }
+      60% { transform: translateY(2px) rotate(-4deg); }
+      70% { transform: translateY(-3px) rotate(2deg); }
+      80% { transform: translateY(1px) rotate(-1deg); }
+      90% { transform: translateY(-1px) rotate(1deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    @keyframes mouthwashSwirl {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.7; }
+      25% { transform: rotate(90deg) scale(1.1); opacity: 0.9; }
+      50% { transform: rotate(180deg) scale(0.9); opacity: 1; }
+      75% { transform: rotate(270deg) scale(1.05); opacity: 0.8; }
+      100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
+    }
+    
+    @keyframes flossSlide {
+      0% { transform: translateX(-20px) rotate(-10deg); opacity: 0; }
+      25% { transform: translateX(-5px) rotate(-5deg); opacity: 0.7; }
+      50% { transform: translateX(5px) rotate(0deg); opacity: 1; }
+      75% { transform: translateX(15px) rotate(5deg); opacity: 0.7; }
+      100% { transform: translateX(25px) rotate(10deg); opacity: 0; }
+    }
+    
+    @keyframes sparkleShine {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+    
+    @keyframes sparkleExplode {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      30% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+      60% { transform: scale(0.8) rotate(360deg); opacity: 0.8; }
+      100% { transform: scale(1.5) rotate(540deg); opacity: 0; }
+    }
+    
+    @keyframes bubblePop {
+      0% { transform: scale(0) translateY(20px); opacity: 0; }
+      50% { transform: scale(1.2) translateY(-10px); opacity: 0.8; }
+      100% { transform: scale(0) translateY(-30px); opacity: 0; }
+    }
+    
+    @keyframes bubbleFloat {
+      0% { transform: translateY(100px) scale(0); opacity: 0; }
+      20% { transform: translateY(80px) scale(0.6); opacity: 0.6; }
+      50% { transform: translateY(40px) scale(1); opacity: 1; }
+      80% { transform: translateY(10px) scale(1.1); opacity: 0.8; }
+      100% { transform: translateY(-20px) scale(0); opacity: 0; }
+    }
+    
+    @keyframes foamBubble {
+      0% { transform: scale(0.5) translateY(0px); opacity: 0.8; }
+      25% { transform: scale(1) translateY(-15px); opacity: 1; }
+      50% { transform: scale(1.2) translateY(-25px); opacity: 0.9; }
+      75% { transform: scale(0.8) translateY(-35px); opacity: 0.6; }
+      100% { transform: scale(0) translateY(-50px); opacity: 0; }
+    }
+    
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes gentleRotate {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 5px rgba(11,132,255,0.3); }
+      50% { box-shadow: 0 0 20px rgba(11,132,255,0.6), 0 0 30px rgba(11,132,255,0.4); }
+    }
+    
+    @keyframes healthyGlow {
+      0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.3); }
+      50% { box-shadow: 0 0 25px rgba(34,197,94,0.6), 0 0 35px rgba(34,197,94,0.4); }
+    }
+    
+    @keyframes cleanSweep {
+      0% { transform: translateX(-100px) rotate(-45deg); opacity: 0; }
+      25% { transform: translateX(-25px) rotate(-20deg); opacity: 0.7; }
+      50% { transform: translateX(25px) rotate(20deg); opacity: 1; }
+      75% { transform: translateX(75px) rotate(45deg); opacity: 0.7; }
+      100% { transform: translateX(150px) rotate(70deg); opacity: 0; }
+    }
+    
+    @keyframes dentistTool {
+      0% { transform: rotate(0deg) translateY(0px); }
+      25% { transform: rotate(-10deg) translateY(-5px); }
+      50% { transform: rotate(10deg) translateY(-8px); }
+      75% { transform: rotate(-5deg) translateY(-3px); }
+      100% { transform: rotate(0deg) translateY(0px); }
+    }
+    
+    @keyframes oralRinse {
+      0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); }
+      33% { transform: scale(1.05) rotate(120deg); filter: hue-rotate(60deg); }
+      66% { transform: scale(0.95) rotate(240deg); filter: hue-rotate(120deg); }
+      100% { transform: scale(1) rotate(360deg); filter: hue-rotate(180deg); }
+    }
+    
+    /* Animated Dental Icons */
+    .dental-icon-animated {
+      display: inline-block;
+      animation: toothBounce 3s ease-in-out infinite;
+    }
+    
+    .brush-icon-animated {
+      display: inline-block;
+      animation: brushClean 2s ease-in-out infinite;
+    }
+    
+    .sparkle-icon {
+      display: inline-block;
+      animation: sparkleShine 2s ease-in-out infinite;
+    }
+    
+    .floating-element {
+      animation: gentleFloat 4s ease-in-out infinite;
+    }
+    
+    /* Service Cards Enhanced Animations */
+    .service-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+      transform: rotate(45deg);
+      transition: all 0.5s;
+      opacity: 0;
+    }
+    
+    .service-card:hover::after {
+      animation: shimmer 1.5s ease-in-out;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+    }
+    
+    /* Hygiene Bubbles Animation */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(11,132,255,0.1), rgba(0,180,216,0.2));
+      pointer-events: none;
+      animation: bubblePop 3s ease-in-out infinite;
+    }
+    
+    .bubble:nth-child(1) { width: 10px; height: 10px; left: 10%; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 15px; height: 15px; left: 30%; animation-delay: 0.5s; }
+    .bubble:nth-child(3) { width: 8px; height: 8px; left: 60%; animation-delay: 1s; }
+    .bubble:nth-child(4) { width: 12px; height: 12px; left: 80%; animation-delay: 1.5s; }
+    
+    /* Enhanced Hero Section with Animations */
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-card::before {
+      content: '🦷';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      opacity: 0.1;
+      animation: toothBounce 4s ease-in-out infinite;
+    }
+    
+    /* Animated Logo Enhancement */
+    .logo {
+      animation: pulseGlow 3s ease-in-out infinite;
+      position: relative;
+    }
+    
+    .logo::after {
+      content: '✨';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      font-size: 12px;
+      animation: sparkleShine 2s ease-in-out infinite;
+    }
+    
+    /* Section Title Enhancements */
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '🦷';
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      opacity: 0.3;
+      animation: toothBounce 3s ease-in-out infinite;
+    }
+    
+    /* Enhanced Service Icons */
+    .service-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover .service-icon {
+      animation: brushClean 0.6s ease-in-out;
+      color: var(--accent);
+      transform: scale(1.2);
+    }
+    
+    /* Testimonial Enhancement */
+    .testimonial {
+      position: relative;
+    }
+    
+    .testimonial::before {
+      content: '😊';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      opacity: 0.6;
+      animation: gentleFloat 3s ease-in-out infinite;
+    }
+    
+    /* Contact Form Animation */
+    .form-card {
+      position: relative;
+    }
+    
+    .form-card::before {
+      content: '🪥';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 18px;
+      opacity: 0.2;
+      animation: brushClean 4s ease-in-out infinite;
+    }
+    
+    /* Button Hover Enhancements */
+    .btn {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    /* Floating Dental Elements */
+    .dental-bg-element {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.05;
+      z-index: 0;
+    }
+    
+    .dental-bg-element.tooth-1 {
+      top: 10%;
+      left: 5%;
+      font-size: 40px;
+      animation: gentleFloat 6s ease-in-out infinite;
+    }
+    
+    .dental-bg-element.brush-1 {
+      top: 30%;
+      right: 8%;
+      font-size: 35px;
+      animation: brushClean 8s ease-in-out infinite;
+    }
+    
+    .dental-bg-element.sparkle-1 {
+      bottom: 20%;
+      left: 10%;
+      font-size: 25px;
+      animation: sparkleShine 4s ease-in-out infinite;
+    }
+    
+    /* Mobile Animation Adjustments */
+    @media (max-width: 767px) {
+      .dental-bg-element {
+        display: none;
+      }
+      
+      .section-title::after {
+        right: -25px;
+        font-size: 16px;
+      }
+      
+      .hero-card::before {
+        font-size: 20px;
+      }
     }
 
   </style>
@@ -695,19 +1187,53 @@
         <a class="cta" href="tel:+6381443149" role="button">Call +91 63814 43149</a>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-        &#9776;
-      </button>
+      <!-- Mobile Navigation Section -->
+      <div class="mobile-nav-section">
+        <!-- Mobile Call Button - Always Visible -->
+        <a href="tel:+6381443149" class="mobile-call" id="mobileCall">
+          <i class="fas fa-phone"></i>
+          Call
+        </a>
+        
+        <!-- Mobile Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
 
-      <!-- Mobile full-screen menu --
+      <!-- Mobile Menu -->
       <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
-        <a href="#home" data-close>Home</a>
-        <a href="#about" data-close>About</a>
-        <a href="#testimonials" data-close>Testimonials</a>
-        <a href="#contact" data-close>Contact</a>
-        <a class="cta" href="tel:+919876543210">Call +91 98765 43210</a>
-      </div>>-- Mobile full-screen menu -->
+        <div class="mobile-menu-content">
+          <a href="#home" data-close>
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+          <a href="#about" data-close>
+            <i class="fas fa-info-circle"></i>
+            <span>About</span>
+          </a>
+          <a href="#services" data-close>
+            <i class="fas fa-tooth"></i>
+            <span>Services</span>
+          </a>
+          <a href="#testimonials" data-close>
+            <i class="fas fa-star"></i>
+            <span>Testimonials</span>
+          </a>
+          <a href="#contact" data-close>
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+          </a>
+          <a class="cta" href="tel:+6381443149" data-close>
+            <i class="fas fa-phone"></i>
+            <span>Call +91 63814 43149</span>
+          </a>
+        </div>
+      </div>
     </nav>
   </header>
 
@@ -715,6 +1241,19 @@
     <!-- HOME / HERO -->
     <section id="home" class="hero-card hero">
       <div class="hero-card">
+        <!-- Additional animated dental elements for hero -->
+        <div style="position: absolute; top: 10px; left: 15px; font-size: 20px; opacity: 0.1; animation: toothWiggle 5s ease-in-out infinite;">🦷</div>
+        <div style="position: absolute; top: 60px; right: 20px; font-size: 16px; opacity: 0.15; animation: brushScrub 4s ease-in-out infinite;">🪥</div>
+        <div style="position: absolute; bottom: 30px; left: 25px; font-size: 14px; opacity: 0.1; animation: sparkleExplode 3s ease-in-out infinite;">✨</div>
+        <div style="position: absolute; bottom: 15px; right: 30px; font-size: 18px; opacity: 0.12; animation: oralRinse 6s ease-in-out infinite;">🧴</div>
+        
+        <!-- Floating hygiene bubbles -->
+        <div class="bubble" style="top: 25px; left: 40%;"></div>
+        <div class="bubble" style="top: 50px; right: 25%;"></div>
+        <div class="bubble" style="bottom: 35px; left: 30%;"></div>
+        <div class="bubble" style="bottom: 60px; right: 35%;"></div>
+        <div class="bubble" style="top: 75px; left: 70%;"></div>
+        
         <h1>CM Dental Clinics</h1>
         <p class="lead">Compassionate dental care using the latest technology — from routine cleaning to cosmetic and restorative dentistry.</p>
 
@@ -765,14 +1304,29 @@
     <section id="about" class="h-section">
       <div class="section-title">About CM Dental Clinics</div>
       <div class="hero-card">
+        <!-- Animated oral hygiene elements -->
+        <div class="bubble" style="top: 10px; left: 20px;"></div>
+        <div class="bubble" style="top: 40px; right: 30px;"></div>
+        <div class="bubble" style="bottom: 20px; left: 50px;"></div>
+        <div class="bubble" style="bottom: 40px; right: 20px;"></div>
+        
         <p>We provide compassionate, evidence-based dentistry with an emphasis on comfort. Our team specializes in preventive care, cosmetic dentistry, orthodontics, dental implants and emergency treatments using industry-standard sterilization and modern equipment.</p>
+        
+        <!-- Floating dental hygiene icons -->
+        <div style="position: absolute; top: 15px; right: 15px; font-size: 18px; opacity: 0.2; animation: mouthwashSwirl 4s ease-in-out infinite;">💧</div>
+        <div style="position: absolute; bottom: 15px; left: 15px; font-size: 16px; opacity: 0.15; animation: flossSlide 5s ease-in-out infinite;">🧵</div>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section id="services" class="h-section">
-      <div class="section-title">Our Dental Services</div>
+      <div class="section-title dental-icon-animated">Our Dental Services</div>
       <p style="color:#2c5aa0; margin-bottom:24px; font-size:16px;">Comprehensive dental care with modern technology and experienced professionals</p>
+      
+      <!-- Floating Dental Background Elements -->
+      <div class="dental-bg-element tooth-1">🦷</div>
+      <div class="dental-bg-element brush-1">🪥</div>
+      <div class="dental-bg-element sparkle-1">✨</div>
       
       <div class="services-grid">
         <!-- Root Canal Therapy -->
@@ -1082,7 +1636,15 @@
   </p>
 
   <div style="margin-top:12px">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2851.13164025043!2d76.9738483!3d10.9544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85bee3cb47d6f%3A0x362e40c5ffb1862!2sCm%20dental%20care!5e1!3m2!1sen!2sin!4v1756627020980!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2851.13164025043!2d76.9738483!3d10.9544396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba85bee3cb47d6f%3A0x362e40c5ffb1862!2sCm%20dental%20care!5e1!3m2!1sen!2sin!4v1756627020980!5m2!1sen!2sin" width="100%" height="200" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    
+    <!-- Find in Map Button -->
+    <div style="margin-top:12px; text-align:center;">
+      <a href="https://www.google.com/maps/place/Cm+dental+care/@10.9544396,76.9738483,17z/data=!3m1!4b1!4m6!3m5!1s0x3ba85bee3cb47d6f:0x362e40c5ffb1862!8m2!3d10.9544396!4d76.9764232!16s%2Fg%2F11v0y8_r4y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none;">
+        <i class="fas fa-map-marker-alt"></i>
+        Find in Map
+      </a>
+    </div>
   </div>
 </div>
 
